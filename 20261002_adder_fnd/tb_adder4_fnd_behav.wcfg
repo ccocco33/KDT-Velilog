@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="tb_adder_fnd_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="tb_adder_fnd" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="2450000fs"></ZoomStartTime>
+      <ZoomEndTime time="3752001fs"></ZoomEndTime>
+      <Cursor1Time time="2550000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="175"></NameColumnWidth>
+      <ValueColumnWidth column_width="84"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="5" />
+   <wvobject fp_name="/tb_adder_fnd/a" type="array">
+      <obj_property name="ElementShortName">a[7:0]</obj_property>
+      <obj_property name="ObjectShortName">a[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_adder_fnd/b" type="array">
+      <obj_property name="ElementShortName">b[7:0]</obj_property>
+      <obj_property name="ObjectShortName">b[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_adder_fnd/ds_sel" type="array">
+      <obj_property name="ElementShortName">ds_sel[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ds_sel[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_adder_fnd/fnd_com" type="array">
+      <obj_property name="ElementShortName">fnd_com[3:0]</obj_property>
+      <obj_property name="ObjectShortName">fnd_com[3:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_adder_fnd/fnd_font" type="array">
+      <obj_property name="ElementShortName">fnd_font[7:0]</obj_property>
+      <obj_property name="ObjectShortName">fnd_font[7:0]</obj_property>
+      <obj_property name="Radix">BINARYRADIX</obj_property>
+   </wvobject>
+</wave_config>
