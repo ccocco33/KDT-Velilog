@@ -1,0 +1,8 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+D:/work/ai_CAM_2/20261002_adder_fnd/20261002_adder_fnd.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+D:/work/ai_CAM_2/20261002_adder_fnd/20261002_adder_fnd.srcs/sim_1/imports/new/tb_full_adder.v,1791285612,verilog,,,,tb_adder_fnd,,,,,,,,
+D:/work/ai_CAM_2/20261002_adder_fnd/20261002_adder_fnd.srcs/sources_1/imports/new/adder.v,1790926754,verilog,,D:/work/ai_CAM_2/20261002_adder_fnd/20261002_adder_fnd.srcs/sources_1/new/fnd_controller.v,,adder;adder_fnd;full_adder;full_adder_4;half_adder,,,,,,,,
+D:/work/ai_CAM_2/20261002_adder_fnd/20261002_adder_fnd.srcs/sources_1/new/fnd_controller.v,1791282368,verilog,,D:/work/ai_CAM_2/20261002_adder_fnd/20261002_adder_fnd.srcs/sim_1/imports/new/tb_full_adder.v,,bcd;clk_div_800Hz;counter_4;decoder_2x4;digit_splitter;fnd_controller;mux_4x1,,,,,,,,
