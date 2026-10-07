@@ -4,10 +4,9 @@ module fnd_controller (
     input        clk,
     input        reset,
     // input  [1:0] ds_sel,
-    input  [8:0] fnd_data,  //9bit , {c,s}
+    input  [13:0] fnd_data,  //9bit , {c,s}
     output [3:0] fnd_com,
     output [7:0] fnd_font
-
 );
     wire [3:0] w_ds1, w_ds10, w_ds100, w_ds1000, w_mux_out;
     // assign fnd_com = 4'b1110;  // 7segments off off off on
@@ -58,7 +57,7 @@ endmodule
 //     reg [24:0] counter_reg;
 //     always @(posedge clk, posedge reset) begin
 //         if (reset) begin
-//             counter_reg <= 16'd0;
+//             counter_reg <= 25'd0;
 //             o_clk_800hz <= 1'b0;
 //         end else begin
 //             counter_reg <= counter_reg + 1;
@@ -100,7 +99,7 @@ endmodule
 //     end
 // endmodule
 
-//2:1 ,1:2
+//2:1 ,1:2 800에 맞추기
 // module clk_div_800Hz (
 //     input clk,
 //     input reset,
@@ -118,7 +117,7 @@ endmodule
 //             if (counter_reg == 41666) begin
 //                 duty_reg = duty_reg + 1;
 //                 counter_reg <= 16'd0;
-//                 if(duty_reg == 1)begin
+//                 if(duty_reg == 2)begin
 //                     o_clk_800hz <= ~(o_clk_800hz);
 //                 end if(duty_reg ==3)begin
 //                     o_clk_800hz <= ~(o_clk_800hz);
@@ -206,7 +205,7 @@ module mux_4x1 (
 
 endmodule
 module digit_splitter (
-    input  [8:0] dsin,
+    input  [13:0] dsin,
     output [3:0] ds1,    //digit 1
     output [3:0] ds10,
     output [3:0] ds100,

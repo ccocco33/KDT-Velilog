@@ -1,0 +1,12 @@
+#-----------------------------------------------------------
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Wed Oct  7 17:40:16 2026
+# Process ID: 10832
+# Current directory: D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.runs/impl_1
+# Command line: vivado.exe -log counter_10000.vdi -applog -product Vivado -messageDb vivado.pb -mode batch -source counter_10000.tcl -notrace
+# Log file: D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.runs/impl_1/counter_10000.vdi
+# Journal file: D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.runs/impl_1\vivado.jou
+#-----------------------------------------------------------
+source counter_10000.tcl -notrace
