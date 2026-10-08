@@ -1,0 +1,7 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.srcs/sim_1/new/tb_counter_10000.v,1791363646,verilog,,,,tb_counter_10000,,,,,,,,
+D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.srcs/sources_1/new/counter_10000.v,1791363615,verilog,,D:/work/ai_CAM_2/20261007_counter_10000/20261007_counter_10000.srcs/sim_1/new/tb_counter_10000.v,,counter_10000;counter_datapath;tick_counter;tick_gen,,,,,,,,
