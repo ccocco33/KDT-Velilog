@@ -50,6 +50,7 @@ module counter_datapath (
     tick_gen U_TICK_GEN (
         .clk   (clk),
         .reset (reset),
+        .clear (clear),
         .o_tick(w_tick),
         .run_stop(run_stop)
     );
@@ -59,14 +60,14 @@ module tick_counter (
     input         reset,
     input         i_tick,
     input         up_down,
-    input clear,
+    input         clear,
     output [13:0] counter
 );
     reg [13:0] counter_reg;  // tick_gen 의 counter_reg와 다르다.
     assign counter = counter_reg;
 
     always @(posedge clk, posedge reset) begin
-        if (reset||clear) begin
+        if (reset|clear) begin
             counter_reg <= 0;
         end else begin
             if (i_tick) begin
@@ -81,12 +82,6 @@ module tick_counter (
                         counter_reg <= 0;
                     end
                 end
-
-
-                // counter_reg <= counter_reg + 1;
-                // if (counter_reg == (10000 - 1)) begin
-                //     counter_reg <= 0;
-                // end
             end
         end
     end
@@ -96,24 +91,22 @@ module tick_gen (
     input  clk,
     input  reset, 
     input  run_stop,
+    input  clear,
     output o_tick
 );
     parameter F_COUNT = 10_000_000;
 
     reg [$clog2(F_COUNT)-1:0] counter_reg;
     reg tick_reg;
-    reg pass;
 
     assign o_tick = tick_reg;
 
     always @(posedge clk, posedge reset) begin
-        if (reset) begin
+        if (reset|clear) begin
             counter_reg <= 0;
             tick_reg <= 0;
-            pass <= 0;
         end else if (~run_stop) begin
-            //tick, counter stop 
-            pass = pass + 1;
+            tick_reg <= 1'b0;
         end else begin
             counter_reg <= counter_reg + 1;
             if (counter_reg == F_COUNT - 1) begin
@@ -123,26 +116,5 @@ module tick_gen (
                 tick_reg <= 1'b0;
             end
         end
-
-        // if (reset) begin
-        //     counter_reg <= 0;
-        //     tick_reg <= 1'b0;
-        // end else begin
-        //     counter_reg <= counter_reg + 1;
-        //     if (counter_reg == F_COUNT - 1) begin
-        //         counter_reg <= 0;
-        //         tick_reg <= 1'b1;
-        //     end else begin
-        //         tick_reg <= 1'b0;
-        //     end
-        // end
-        // if (counter_reg == 1) begin
-        //     tick_reg <= ~tick_reg;
-        // end else if (counter_reg == 2) begin
-        //     tick_reg <= ~tick_reg;
-        // end else if (counter_reg == F_COUNT - 1) begin
-        //     counter_reg <= 1'b0;
-        // end
-
     end
 endmodule
