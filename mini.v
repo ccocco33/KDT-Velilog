@@ -20,35 +20,34 @@ module tick_counter #(
     reg [$clog2(TIMES)-1:0] counter_next;
     assign time_count = counter_reg;
     localparam max = TIMES - 1;
-    localparam top_1  = max % 10; 
-    localparam max_10 = max / 10;  //10의 자리 최댓값 (9 / 5 / 2)
+    localparam max_1 = max % 10;  //1의 자리 최댓값
+    localparam max_10 = max / 10;  //10의 자리 최댓값
     wire [3:0] counter_ds1 = counter_reg % 10;  //지금 1자리
     wire [3:0] counter_ds10 = counter_reg / 10;  //지금 10자리
-   
-    wire [3:0] max_1 = (counter_ds10 == max_10) ? top_1 : 4'd9;
     reg  [3:0] counter_next_ds1;
     reg  [3:0] counter_next_ds10;
 
     always @(*) begin
         counter_next_ds10 = counter_ds10;
         counter_next_ds1  = counter_ds1;
-        if (selected_digit[0]) begin  // 10의 자리 (ds10, ds1000)
+        if (selected_digit[0]) begin  //ds10,ds1000 더하기 빼기 10씩 되는곳
             if (up) begin
-                if (counter_ds10 >= max_10) counter_next_ds10 = 0;
-                else if (counter_ds10 + 1 == max_10 && counter_ds1 > top_1)
-                    counter_next_ds10 = 0;  
-                else counter_next_ds10 = counter_ds10 + 1;
-            end else if (down) begin
-                if (counter_ds10 != 0) counter_next_ds10 = counter_ds10 - 1;
-                else if (counter_ds1 > top_1)
-                    counter_next_ds10 = max_10 - 1;                      
-                else counter_next_ds10 = max_10;
+                //1자리가 1의자리 맥스보다 크다면 10의 자리는 10의자리 맥스보다 1작은 수가 최대가 된다. 아니라면 10의자리 맥스까지 가능하다.
+                counter_next_ds10 = (counter_ds1 > max_1) ? ((counter_ds10 == max_10 - 1) ? 0 : counter_ds10 + 1)
+                                                          : ((counter_ds10 == max_10)     ? 0 : counter_ds10 + 1);
+            end else if (down) begin  // ds1,ds100 //빼기 10씩
+                //1의 자리 확인 -> 1의 자리 맥스보다 크면 max10보다 1 작은거가 최대 / 1의자리 맥스보다 작으면 max 10까지 돌수있음
+                counter_next_ds10 = (counter_ds1 > max_1) ? ((counter_ds10 == 0) ? max_10 - 1 : counter_ds10 - 1)
+                                                          : ((counter_ds10 == 0) ? max_10     : counter_ds10 - 1);
             end
-        end else begin  // 1의 자리 (ds1, ds100)
+        end else begin  //ds1,ds100 더하기 빼기 1씩 되는곳
             if (up) begin
-                counter_next_ds1 = (counter_ds1 >= max_1) ? 0 : counter_ds1 + 1;
-            end else if (down) begin
-                counter_next_ds1 = (counter_ds1 == 0) ? max_1 : counter_ds1 - 1;
+                counter_next_ds1 = (counter_ds10 == max_10) ? ((counter_ds1 == max_1) ? 0 : counter_ds1 + 1)
+                                                            : ((counter_ds1 == 9)     ? 0 : counter_ds1 + 1);
+            end else if (down) begin  // ds1,ds100 // 빼기 1씩
+                //10의자리 == max_10?
+                counter_next_ds1 = (counter_ds10 == max_10) ? ((counter_ds1 == 0) ? max_1 : counter_ds1 - 1)
+                                                            : ((counter_ds1 == 0) ? 9     : counter_ds1 - 1);
             end
         end
 
