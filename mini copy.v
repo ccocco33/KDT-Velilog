@@ -1,6 +1,7 @@
 module tick_counter #(
     parameter TIMES = 100,
-    BIT_WIDTH = 7
+    BIT_WIDTH = 7,
+    UNIT_OF_TIME = 00 // 00 - msec,01 sec,10-min, 11-hour
 ) (
     input                      clk,
     input                      rst,
