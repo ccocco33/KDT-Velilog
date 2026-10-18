@@ -9,8 +9,6 @@ module watch_datapath #(
     input sw_show_mode,
     input sw_display_mode,
     input edit,
-    input right,
-    input left,
     input up,
     input down,
     input [1:0]selected_digit,
@@ -31,9 +29,6 @@ module watch_datapath #(
         .i_tick(w_tick_hour),
         .up(up),
         .down(down),
-        .right(right),
-        .left(left),
-        // .sw_show_mode(sw_show_mode),
         .sw_display_mode(sw_display_mode),
         .edit(edit),
         .selected_digit(selected_digit),
@@ -51,9 +46,6 @@ module watch_datapath #(
         .i_tick(w_tick_min),
         .up(up),
         .down(down),
-        .right(right),
-        .left(left),
-        // .sw_show_mode(sw_show_mode),
         .sw_display_mode(sw_display_mode),
         .edit(edit),
         .selected_digit(selected_digit),
@@ -71,9 +63,6 @@ module watch_datapath #(
         .i_tick(w_tick_sec),
         .up(up),
         .down(down),
-        .right(right),
-        .left(left),
-        // .sw_show_mode(sw_show_mode),
         .sw_display_mode(sw_display_mode),
         .edit(edit),
         .selected_digit(selected_digit),
@@ -91,9 +80,6 @@ module watch_datapath #(
         .i_tick(w_tick_10ms),
         .up(up),
         .down(down),
-        .right(right),
-        .left(left),
-        // .sw_show_mode(sw_show_mode),
         .sw_display_mode(sw_display_mode),
         .edit(edit),
         .selected_digit(selected_digit),
@@ -118,9 +104,6 @@ module tick_counter_watch #(
     input                      i_tick,
     input                      up,
     input                      down,
-    input                      right,
-    input                      left,
-    // input                      sw_show_mode,
     input                      sw_display_mode,
     input                      edit,
     input      [          1:0] selected_digit,
@@ -138,7 +121,7 @@ module tick_counter_watch #(
     reg [3:0] counter_next_ds1;
     reg [3:0] counter_next_ds10;
     //sw_display_mode,UNIT_OF_TIME, selected_digit을 가지고 지금 내가 수정하는것인지 알아야한다.
-    wire [1:0]edit_this_module = (sw_display_mode)? ((selected_digit[1]?11:10)):(selected_digit[1]?01:00); //(hour:min):(sec:msec)
+    wire [1:0]edit_this_module = (sw_display_mode)? ((selected_digit[1]?2'b11:2'b10)):(selected_digit[1]?2'b01:2'b00); //(hour:min):(sec:msec)
 
     always @(*) begin
         counter_next_ds10 = counter_ds10;
@@ -221,8 +204,10 @@ module tick_gen_100hz_watch (
                 end else begin
                     o_tick <= 1'b0;
                 end
+                
             
         end
     end
 
 endmodule
+

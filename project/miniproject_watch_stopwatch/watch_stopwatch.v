@@ -23,7 +23,7 @@ module watch_stopwatch_top (
     wire w_btnR, w_run_stop, w_right;
     wire w_btnL, w_clear;
     wire w_btnU, w_mode;
-    wire w_btnD, w_laptime;
+    wire w_btnD, w_laptime, w_lap_cap;
     wire w_up_control_unit, w_down_control_unit;
     wire w_edit;
     wire [1:0] w_selected_digit;
@@ -67,20 +67,20 @@ module watch_stopwatch_top (
     );
 
     mux_4_8_bt_control_unit U_MUX_4_8_bt_control (
-        .btnR(w_btnR),
-        .btnL(w_btnL),
-        .btnU(w_btnU),
-        .btnD(w_btnD),
-        .sw_show_mode(sw_show_mode),
-        .btnR_stopwatch(w_btnR_stopwatch),
-        .btnL_stopwatch(w_btnL_stopwatch),
-        .btnU_stopwatch(w_btnU_stopwatch),
-        .btnD_stopwatch(w_btnD_stopwatch),
-        .btnR_watch(w_btnR_watch),
-        .btnL_watch(w_btnL_watch),
-        .btnU_watch(w_btnU_watch),
-        .btnD_watch(w_btnD_watch)
-    );
+    .btnR(w_btnR),
+    .btnL(w_btnL),
+    .btnU(w_btnU),
+    .btnD(w_btnD),
+    .sw_show_mode(sw_show_mode),
+    .btnR_stopwatch(w_btnR_stopwatch),
+    .btnL_stopwatch(w_btnL_stopwatch),
+    .btnU_stopwatch(w_btnU_stopwatch),
+    .btnD_stopwatch(w_btnD_stopwatch),
+    .btnR_watch(w_btnR_watch),
+    .btnL_watch(w_btnL_watch),
+    .btnU_watch(w_btnU_watch),
+    .btnD_watch(w_btnD_watch)
+);
     // 워치용으로수정한 컨트롤 유닛, 데이터패스 와야합니다.!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
     watch_control_unit U_WATCH_CONTROL_UNIT (
         .clk(clk),
@@ -105,11 +105,12 @@ module watch_stopwatch_top (
         .btn_run_stop(w_btnR_stopwatch),
         .btn_clear   (w_btnL_stopwatch),
         .btn_mode    (w_btnU_stopwatch),
-        // .btn_laptime (w_btnD_stopwatch),
+        .btn_laptime (w_btnD_stopwatch),
         .clear       (w_clear),
         .run_stop    (w_run_stop),
-        .mode        (w_mode)
-        // .laptime     (w_laptime)
+        .mode        (w_mode),
+        .laptime     (w_laptime),
+        .lap_cap     (w_lap_cap)
     );
     stopwatch_datapath U_STOPWATCH_DATAPATH (  //먹스랑 이어주기
         .clk     (clk),
@@ -117,7 +118,8 @@ module watch_stopwatch_top (
         .run_stop(w_run_stop),
         .clear   (w_clear),
         .mode    (w_mode),
-        // .laptime (w_laptime),
+        .laptime (w_laptime),
+        .lap_cap (w_lap_cap),
         .msec    (w_msec_stopwatch),
         .sec     (w_sec_stopwatch),
         .min     (w_min_stopwatch),
@@ -130,8 +132,6 @@ module watch_stopwatch_top (
         .sw_show_mode(sw_show_mode),
         .sw_display_mode(sw_display_mode),
         .edit(w_edit),
-        .right(w_right),
-        .left(w_left),
         .up(w_up_control_unit),
         .down(w_down_control_unit),
         .selected_digit(w_selected_digit),
@@ -209,12 +209,12 @@ module mux_2x1x4_result #(
         end
     end
 endmodule
-module mux_4_8_bt_control_unit (
-    input  btnR,
-    input  btnL,
-    input  btnU,
-    input  btnD,
-    input  sw_show_mode,
+module mux_4_8_bt_control_unit(
+    input btnR,
+    input btnL,
+    input btnU,
+    input btnD,
+    input sw_show_mode,
     output btnR_stopwatch,
     output btnL_stopwatch,
     output btnU_stopwatch,
@@ -225,8 +225,8 @@ module mux_4_8_bt_control_unit (
     output btnD_watch
 );
     assign btnR_stopwatch=btnR&&(sw_show_mode);
-    assign btnL_stopwatch=btnL&&(sw_show_mode);
-    assign btnU_stopwatch=btnU&&(sw_show_mode);
+    assign btnL_stopwatch=btnL&&(sw_show_mode); 
+    assign btnU_stopwatch=btnU&&(sw_show_mode); 
     assign btnD_stopwatch=btnD&&(sw_show_mode);
     assign btnR_watch    =btnR&&(~sw_show_mode);
     assign btnL_watch    =btnL&&(~sw_show_mode);

@@ -257,7 +257,8 @@ module flash_digit (
             o_clk_2hz <= 0;
         end else begin
             flash_counter_reg <= flash_counter_reg + 1;
-            if (flash_counter_reg == 9'b111111111) begin
+            if (flash_counter_reg == 9'd499) begin
+                flash_counter_reg <= 0;
                 o_clk_2hz <= ~o_clk_2hz;
             end
         end

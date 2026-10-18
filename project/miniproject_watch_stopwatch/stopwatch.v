@@ -21,10 +21,35 @@ module stopwatch_datapath #(
 
     wire w_tick_10ms, w_tick_sec, w_tick_min, w_tick_hour;
 
-    reg [ MSEC_BIT_WIDTH -1 :0] w_msec;
-    reg [  SEC_BIT_WIDTH -1 :0] w_sec;
-    reg [  MIN_BIT_WIDTH -1 :0] w_min;
-    reg [ HOUR_BIT_WIDTH -1 :0] w_hour;
+    wire [ MSEC_BIT_WIDTH -1 :0] w_lap_msec;
+    wire [  SEC_BIT_WIDTH -1 :0] w_lap_sec;
+    wire [  MIN_BIT_WIDTH -1 :0] w_lap_min;
+    wire [ HOUR_BIT_WIDTH -1 :0] w_lap_hour;
+    wire [ MSEC_BIT_WIDTH -1 :0] w_count_msec;
+    wire [  SEC_BIT_WIDTH -1 :0] w_count_sec;
+    wire [  MIN_BIT_WIDTH -1 :0] w_count_min;
+    wire [ HOUR_BIT_WIDTH -1 :0] w_count_hour;
+
+    mux_2x1x4_lapstop #(
+    .MSEC_BIT_WIDTH(MSEC_BIT_WIDTH),
+    .SEC_BIT_WIDTH(SEC_BIT_WIDTH),
+    .MIN_BIT_WIDTH(MIN_BIT_WIDTH),
+    .HOUR_BIT_WIDTH(HOUR_BIT_WIDTH)
+) U_MUX_LAP_STOPWATCH (
+    .msec_lap(w_lap_msec),
+    .sec_lap(w_lap_sec),
+    .min_lap(w_lap_min),
+    .hour_lap(w_lap_hour),
+    .msec_stopwatch(w_count_msec),
+    .sec_stopwatch(w_count_sec),
+    .min_stopwatch(w_count_min),
+    .hour_stopwatch(w_count_hour),
+    .laptime(laptime),
+    .msec_result(msec),
+    .sec_result(sec),
+    .min_result(min),
+    .hour_result(hour) 
+);
 
     stopwatch_laptime #(
     .MSEC_BIT_WIDTH (MSEC_BIT_WIDTH),
@@ -37,14 +62,14 @@ module stopwatch_datapath #(
     .clear  (clear),
     .laptime(laptime),
     .lap_cap(lap_cap),    
-    .i_msec(w_msec),
-    .i_sec (w_sec),
-    .i_min (w_min),
-    .i_hour(w_hour),           
-    .o_msec(msec),
-    .o_sec (sec),
-    .o_min (min),
-    .o_hour(hour)  
+    .i_msec(w_count_msec),
+    .i_sec (w_count_sec),
+    .i_min (w_count_min),
+    .i_hour(w_count_hour),           
+    .o_msec(w_lap_msec),
+    .o_sec (w_lap_sec),
+    .o_min (w_lap_min),
+    .o_hour(w_lap_hour)  
 );
 
 
@@ -57,7 +82,7 @@ module stopwatch_datapath #(
         .i_tick    (w_tick_hour),
         .clear     (clear),
         .mode      (mode),
-        .time_count(hour),
+        .time_count(w_count_hour),
         .o_tick    ()
     );
     tick_counter #(
@@ -69,7 +94,7 @@ module stopwatch_datapath #(
         .i_tick    (w_tick_min),
         .clear     (clear),
         .mode      (mode),
-        .time_count(min),
+        .time_count(w_count_min),
         .o_tick    (w_tick_hour)
     );
     tick_counter #(
@@ -81,7 +106,7 @@ module stopwatch_datapath #(
         .i_tick    (w_tick_sec),
         .clear     (clear),
         .mode      (mode),
-        .time_count(sec),
+        .time_count(w_count_sec),
         .o_tick    (w_tick_min)
     );
     tick_counter #(
@@ -93,7 +118,7 @@ module stopwatch_datapath #(
         .i_tick    (w_tick_10ms),
         .clear     (clear),
         .mode      (mode),
-        .time_count(msec),
+        .time_count(w_count_msec),
         .o_tick    (w_tick_sec)
     );
 
@@ -228,9 +253,35 @@ module stopwatch_laptime #(
         end
     end
 
-    assign o_msec = laptime ? lap_msec : i_msec;  
-    assign o_sec  = laptime ? lap_sec  : i_sec;
-    assign o_min  = laptime ? lap_min  : i_min;
-    assign o_hour = laptime ? lap_hour : i_hour;  
+    assign o_msec = lap_msec;  
+    assign o_sec  = lap_sec;
+    assign o_min  = lap_min;
+    assign o_hour = lap_hour;  
 
+endmodule
+
+module mux_2x1x4_lapstop #(
+    parameter MSEC_BIT_WIDTH = 7,
+    parameter SEC_BIT_WIDTH  = 6,
+    parameter MIN_BIT_WIDTH  = 6,
+    parameter HOUR_BIT_WIDTH = 5
+) (
+    input      [MSEC_BIT_WIDTH-1:0] msec_lap,
+    input      [ SEC_BIT_WIDTH-1:0]  sec_lap,
+    input      [ MIN_BIT_WIDTH-1:0]  min_lap,
+    input      [HOUR_BIT_WIDTH-1:0] hour_lap,
+    input      [MSEC_BIT_WIDTH-1:0] msec_stopwatch,
+    input      [ SEC_BIT_WIDTH-1:0]  sec_stopwatch,
+    input      [ MIN_BIT_WIDTH-1:0]  min_stopwatch,
+    input      [HOUR_BIT_WIDTH-1:0] hour_stopwatch,
+    input                           laptime,
+    output     [MSEC_BIT_WIDTH-1:0] msec_result,
+    output     [ SEC_BIT_WIDTH-1:0]  sec_result,
+    output     [ MIN_BIT_WIDTH-1:0]  min_result,
+    output     [HOUR_BIT_WIDTH-1:0] hour_result
+);
+    assign msec_result = laptime ? msec_lap : msec_stopwatch;
+    assign sec_result  = laptime ? sec_lap  : sec_stopwatch;
+    assign min_result  = laptime ? min_lap  : min_stopwatch;
+    assign hour_result = laptime ? hour_lap : hour_stopwatch;
 endmodule
