@@ -1,0 +1,3 @@
+Vivado Simulator 2020.2
+Time resolution is 1 ps
+$stop called at time : 8333810 ns : File "D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sim_1/imports/uart/tb_uart.v" Line 88

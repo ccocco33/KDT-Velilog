@@ -1,0 +1,16 @@
+# compile verilog/system verilog design source files
+verilog xil_defaultlib  \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/new/ascii_decoder.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/fifo.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart/fnd_controller.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/new/uart_fifo_ascii.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart_rx.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart_tx.v" \
+"../../../../20261027_uart_ascii_stopwatch_watch.srcs/sim_1/imports/uart/tb_uart.v" \
+
+# compile glbl module
+verilog xil_defaultlib "glbl.v"
+
+# Do not sort compile order
+nosort

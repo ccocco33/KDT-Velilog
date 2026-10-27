@@ -1,0 +1,13 @@
+0.7
+2020.2
+Nov 18 2020
+09:47:47
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.sim/sim_1/behav/xsim/glbl.v,1605673889,verilog,,,,glbl,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sim_1/imports/uart/tb_uart.v,1793084188,verilog,,,,tb_uart,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart/fnd_controller.v,1792559325,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart.v,,bcd;clk_div_800Hz;counter_4;decoder_2x4;digit_splitter;fnd_controller;mux_4x1,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/fifo.v,1792659011,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart/fnd_controller.v,,control_unit;fifo;register_file,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart.v,1793082770,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/new/uart_fifo_ascii.v,,baud_tick_gen;uart_fifo_loopback;uart_loopback,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart_rx.v,1792478549,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart_tx.v,,uart_rx,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart_tx.v,1792484587,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sim_1/imports/uart/tb_uart.v,,uart_tx,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/new/ascii_decoder.v,1793088156,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/fifo.v,,ascii_decoder,,,,,,,,
+D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/new/uart_fifo_ascii.v,1793082885,verilog,,D:/work/ai_CAM_2/20261027_uart_ascii_stopwatch_watch/20261027_uart_ascii_stopwatch_watch.srcs/sources_1/imports/uart_fifo_sourcescode/uart_rx.v,,uart_fifo_ascii,,,,,,,,
